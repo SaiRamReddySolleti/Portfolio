@@ -1,0 +1,179 @@
+{
+  "personalInfo": {
+    "name": "Sairam Reddy Solleti",
+    "title": "Full Stack Developer",
+    "email": "solleti.sairam2002@gmail.com",
+    "phone": "+1 (219) 368-0522",
+    "location": "Indiana, United States",
+    "github": "https://github.com/SaiRamReddySolleti",
+    "linkedin": "https://www.linkedin.com/in/sai-ram-reddy-solleti-17b881247/",
+    "website": "https://sairamreddy.site",
+    "summary": "Full Stack Developer with a passion for AI and a drive to create impactful solutions. Skilled in JavaScript, PHP, and modern web technologies, I am dedicated to continuous learning and leveraging AI to solve complex problems. My goal is to innovate and deliver high-quality applications that make a difference.",
+    "image": "https://avatars.githubusercontent.com/u/40724828?v=4"
+  },
+  "experience": [
+    {
+      "company": "Genpact",
+      "position": "Process Associate",
+      "startDate": "July 05 2024",
+      "endDate": "Sept 02 2024",
+      "description": "Liaised with cross-functional teams to address discrepancies, ensuring the prompt and adequate resolution of customer queries. Assisted in the implementation of new systems, policies, and processes, contributing to their successful adoption, and driving operational improvements."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Purdue University Northwest, Hammond, IN 46323, USA",
+      "degree": "Masters",
+      "startDate": "Jan, 2025",
+      "endDate": "Dec, 2026",
+      "description": "Masters of Science in Applied Artificial Intelligence",
+      "institutionUrl":"https://www.pnw.edu/"
+    },
+    {
+      "institution": "Kakatiya Institute of Technology and Science, Hasanparthy, Warangal",
+      "degree": "Bachelors of Technology (CSE(N))",
+      "startDate": "2020",
+      "endDate": "2024",
+      "description": "Computer Science and Engneering with specialization in Networks grade achived 8.3 CGPA",
+      "institutionUrl":"https://kitsw.ac.in/"
+    },
+    {
+      "institution": "SR Edu Centre, Subedari, Warangal",
+      "degree": "Intermediate",
+      "startDate": "2018",
+      "endDate": "2020",
+      "description": "Junior College"
+    },
+    {
+      "institution": "Tejaswi High School, Hasanparthy, Warangal",
+      "degree": "Class X",
+      "startDate": "2016",
+      "endDate": "2018",
+      "description": "High School"
+    }
+  ],
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "PHP",
+    "C",
+    "Java",
+    "Python",
+    "SQL",
+    "MongoDB",
+    "ThingSpeak",
+    "Microsoft Azure"
+  ],
+  "certifications": [
+    {
+      "name": "Introduction to IOT",
+      "date": "2021-22",
+      "description": "Cisco"
+    },
+    {
+      "name": "Cybersecurity Essentials",
+      "date": "2022-23",
+      "description": "Cisco"
+    },
+    {
+      "name": "Python 3 programming",
+      "date": "2022-23",
+      "description": "Coursera, University of Michigan"
+    },
+    {
+      "name": "Java Full Stack",
+      "date": "2022-23",
+      "description": "Wipro"
+    },
+    {
+      "name": "CCNA (Cisco Certified Network Associate)",
+      "date": "2023-24",
+      "description": "Cisco"
+    }
+  ],
+  "projects": [
+    {
+      "name": "A Secure De-Centralized Protocol for Voting System",
+      "description": "Developed a secure, decentralized voting protocol based on blockchain technology to ensure the integrity and transparency of elections.",
+      "technologies": ["Blockchain"],
+      "link": "https://example.com/project1"
+    },
+    {
+      "name": "Detection of Artificially Ripened Fruits",
+      "description": "Engineered an IoT device equipped with a gas detector and microcontroller to accurately measure ethylene gas levels, a key indicator of fruit ripeness.",
+      "technologies": ["IoT", "Microcontroller"],
+      "link": "https://example.com/project1"
+    },
+    {
+      "name": "Developed a Webpage for Examinations Like JEE",
+      "description": "Designed and developed a comprehensive web-based platform for conducting online examinations similar to JEE, providing a seamless and efficient experience for both students and administrators.",
+      "technologies": ["Web Development"],
+      "link": "https://example.com/project1"
+    }
+  ],
+  "positionsOfResponsibility": [
+    {
+      "position": "General Secretary",
+      "organization": "CSENA Association, KITSW",
+      "startDate": "2023",
+      "endDate": "Present"
+    },
+    {
+      "position": "General Secretary",
+      "organization": "NSS Club, KITSW",
+      "startDate": "2023",
+      "endDate": "Present"
+    },
+    {
+      "position": "Awarded by the Indian Red Cross Society",
+      "description": "Organized a successful blood donation camp."
+    },
+    {
+      "position": "Recognized by the district collector and commissioner of police",
+      "description": "Exceptional performance during National Road Safety Week."
+    },
+    {
+      "position": "Participated in a National Adventure Training Camp",
+      "location": "Dharamshala, Himachal Pradesh",
+      "startDate": "2023",
+      "endDate": "Present"
+    }
+  ],
+  "achievements": [
+    {
+      "achievement": "2nd at ‘KITS MUN’22 – A Mock United Nations conducted by KITSW",
+      "date": "2022"
+    },
+    {
+      "achievement": "4th at ‘Swami Vivekananda & Sri Ramakrishna birth celebrations Competition by KITSW",
+      "date": "2022"
+    },
+    {
+      "achievement": "2nd at ‘Treasure Hunt conducted by KITSW as a part of Sumshodini’21",
+      "date": "2021"
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "proficiency": "Fluent"
+    },
+    {
+      "language": "Telugu",
+      "proficiency": "Native"
+    },
+    {
+      "language": "Hindi",
+      "proficiency": "Intermediate"
+    }
+  ],
+  "interests": [
+    "Artificial Intelligence",
+    "Blockchain",
+    "IoT",
+    "Web Development",
+    "Reading",
+    "Traveling"
+  ]
+}
