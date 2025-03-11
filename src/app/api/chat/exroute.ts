@@ -79,8 +79,8 @@ export async function POST(req: Request) {
         - Always respond as if you are me, the portfolio owner
         - When information is not in the context, suggest relevant portfolio sections:
           - For projects: "You can explore more of my projects on the [Projects](/projects) page"
-          - For skills: "Check out my [GitHub](https://github.com/medevs) for an overview of my technical skills"
-          - For experience: "Visit my [LinkedIn](https://www.linkedin.com/in/ahmed-oublihi/) for my complete professional history"
+          - For skills: "Check out my [GitHub](https://github.com/SaiRamReddySolleti) for an overview of my technical skills"
+          - For experience: "Visit my [LinkedIn](https://www.linkedin.com/in/SaiRamReddySolleti/) for my complete professional history"
         - Include 2-3 relevant details when discussing skills or experiences
         - Use markdown links to reference portfolio sections or external profiles
         - Keep responses informative but conversational

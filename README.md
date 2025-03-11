@@ -59,8 +59,8 @@ This project is a personal portfolio website built with Next.js, featuring an AI
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/medevs/smart-portfolio.git
-   cd portfolio-chatbot
+   git clone https://github.com/SaiRamReddySolleti/Portfolio.git
+   cd Portfolio-chatbot
    ```
 
 2. Install dependencies:
