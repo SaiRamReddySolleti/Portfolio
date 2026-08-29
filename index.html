@@ -59,7 +59,9 @@ h1,h2,h3{font-family:var(--display);color:var(--fg);margin:0;letter-spacing:-.04
 
 .pill{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:80;
   display:flex;align-items:center;gap:4px;background:var(--fg);border-radius:999px;
-  padding:7px 8px 7px 20px;box-shadow:0 8px 30px rgba(0,0,0,.16)}
+  padding:7px 8px 7px 20px;box-shadow:0 8px 30px rgba(0,0,0,.16);
+  transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .32s ease}
+.pill.hid{transform:translateX(-50%) translateY(-150%);opacity:0}
 .pill .nm{font-family:var(--display);font-weight:700;font-size:14px;color:var(--bg);margin-right:8px}
 .pill a{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--bg);opacity:.6;
   padding:7px 11px;border-radius:999px;transition:.2s}
@@ -117,7 +119,9 @@ section{padding:110px 0}
 .sh{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:14px;flex-wrap:wrap}
 .sh h2{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-3)}
 .sh .ct{font-family:var(--mono);font-size:11.5px;color:var(--fg-3)}
-.sr{height:1px;background:var(--line);margin-bottom:48px}
+.sr{height:1px;background:var(--line);margin-bottom:48px;
+    transform:scaleX(0);transform-origin:0 50%;transition:transform 1.15s cubic-bezier(.16,1,.3,1)}
+.sr.in{transform:scaleX(1)}
 
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
 @media (max-width:760px){.kpis{grid-template-columns:1fr}}
@@ -131,6 +135,7 @@ section{padding:110px 0}
 .w{border-top:1px solid var(--line);padding:42px 0;display:grid;grid-template-columns:64px 1fr;gap:28px}
 @media (max-width:860px){.w{grid-template-columns:1fr;gap:12px}}
 .w .no{font-family:var(--mono);font-size:12px;color:var(--fg-3);padding-top:12px}
+@media (min-width:861px){.w .no{position:sticky;top:108px;align-self:start}}
 .w .kick{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
 .w h3{font-size:clamp(26px,4vw,42px);font-weight:700;line-height:1.04;margin:0 0 10px}
 .w .dek{font-size:17px;color:var(--fg-2);margin:0 0 16px;max-width:var(--measure)}
@@ -181,7 +186,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .rv,.big .ln>span,.blurb,.year,.glyph{opacity:1!important;transform:none!important;transition:none!important}
+  .sr{transform:none!important;transition:none!important}
+  .pill{transition:none}
+  .pill.hid{transform:translateX(-50%);opacity:1}
   .mq-in,.glyph.g1,.glyph.g2{animation:none}
+  .w .no{position:static}
 }
 </style>
 </head>
@@ -401,17 +410,105 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
   });
   requestAnimationFrame(function(){document.body.classList.add('on');});
 
-  var bar=document.getElementById('bar');
-  addEventListener('scroll',function(){
-    var h=document.documentElement.scrollHeight-innerHeight;
-    bar.style.width=(h>0?scrollY/h*100:0)+'%';
-  },{passive:true});
+  /* ---------------------------------------------------------------
+     Scroll layer: eased momentum scrolling (Lenis-style lerp) plus
+     scroll-linked parallax on the hero. Parallax uses the standalone
+     `translate` property so it composes with the entrance `transform`
+     animations instead of overwriting them.
+  ---------------------------------------------------------------- */
+  var bar=document.getElementById('bar'), pill=document.querySelector('.pill');
+  var heroWrap=document.querySelector('.hero .wrap');
+  var canTranslate=!!(window.CSS&&CSS.supports&&CSS.supports('translate','0px 10px'));
+  var fine=matchMedia('(pointer:fine)').matches;
+
+  var plx=[];
+  if(canTranslate&&!reduce){
+    [['.tagrow',.05],['.big',.11],['.blurb',.17],['.portrait',.23],
+     ['.glyph.g1',.36],['.glyph.g2',-.20]].forEach(function(p){
+      document.querySelectorAll(p[0]).forEach(function(el){
+        el.style.willChange='translate'; plx.push([el,p[1]]);
+      });
+    });
+  }
+
+  var lastY=-1, prevY=0;
+  function paint(){
+    var y=scrollY;
+    if(y===lastY) return;
+    lastY=y;
+    var vh=innerHeight, h=document.documentElement.scrollHeight-vh;
+    bar.style.width=(h>0?y/h*100:0)+'%';
+
+    for(var i=0;i<plx.length;i++)
+      plx[i][0].style.translate='0 '+(y*plx[i][1]).toFixed(1)+'px';
+
+    if(heroWrap&&!reduce){
+      var o=1-y/(vh*.95);
+      heroWrap.style.opacity=(o<0?0:o>1?1:o).toFixed(3);
+    }
+
+    if(!reduce){
+      if(y>vh*.55&&y>prevY+4) pill.classList.add('hid');
+      else if(y<prevY-4||y<vh*.55) pill.classList.remove('hid');
+    }
+    prevY=y;
+  }
+
+  var sm=null;
+  if(!reduce&&fine){
+    root.style.scrollBehavior='auto';          // JS owns the easing now
+    sm=(function(){
+      var target=scrollY, cur=scrollY, run=false;
+      function cl(v){var m=document.documentElement.scrollHeight-innerHeight;
+                     return v<0?0:(v>m?m:v);}
+      function tick(){
+        var d=target-cur;
+        if(Math.abs(d)<.35){cur=target;scrollTo(0,cur);run=false;paint();return;}
+        cur+=d*.11;
+        scrollTo(0,cur);
+        paint();
+        requestAnimationFrame(tick);
+      }
+      function go(){if(!run){run=true;requestAnimationFrame(tick);}}
+      addEventListener('wheel',function(e){
+        if(e.ctrlKey||e.metaKey) return;                 // leave pinch-zoom alone
+        e.preventDefault();
+        var d=e.deltaY;
+        if(e.deltaMode===1) d*=16; else if(e.deltaMode===2) d*=innerHeight;
+        target=cl(target+d); go();
+      },{passive:false});
+      addEventListener('scroll',function(){       // keyboard, scrollbar, find-in-page
+        if(!run){cur=target=scrollY;}
+        paint();
+      },{passive:true});
+      addEventListener('resize',function(){target=cl(target);},{passive:true});
+      return {to:function(v){target=cl(v);go();}};
+    })();
+  } else {
+    addEventListener('scroll',paint,{passive:true});
+  }
+  addEventListener('resize',function(){lastY=-1;paint();},{passive:true});
+
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href');
+      if(id.length<2) return;
+      var t=document.querySelector(id);
+      if(!t) return;
+      e.preventDefault();
+      var top=t.getBoundingClientRect().top+scrollY-72;
+      if(sm) sm.to(top);
+      else scrollTo({top:top,behavior:reduce?'auto':'smooth'});
+      try{history.replaceState(null,'',id);}catch(err){}
+    });
+  });
+  paint();
 
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){
       es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
     },{rootMargin:'0px 0px -8% 0px'});
-    document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+    document.querySelectorAll('.rv,.sr').forEach(function(el){io.observe(el);});
 
     var co=new IntersectionObserver(function(es){
       es.forEach(function(e){
@@ -429,7 +526,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
     },{threshold:.5});
     document.querySelectorAll('.kpi b').forEach(function(el){co.observe(el);});
   } else {
-    document.querySelectorAll('.rv').forEach(function(e){e.classList.add('in');});
+    document.querySelectorAll('.rv,.sr').forEach(function(e){e.classList.add('in');});
     document.querySelectorAll('.kpi b').forEach(function(e){e.textContent=(e.dataset.prefix||'')+e.dataset.to+(e.dataset.suffix||'');});
   }
 })();
