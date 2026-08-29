@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://solleti.dev/sitemap.xml

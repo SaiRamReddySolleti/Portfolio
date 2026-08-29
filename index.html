@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sai Ram Reddy Solleti — AI/ML Engineer</title>
+<meta name="description" content="AI/ML engineer building voice agents, quantum-secured systems and multi-agent algorithms. M.S. Applied AI at Purdue, 4.0 GPA. Seven projects, reported with the numbers they actually produced.">
+<meta name="author" content="Sai Ram Reddy Solleti">
+<link rel="canonical" href="https://solleti.dev/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://solleti.dev/">
+<meta property="og:title" content="Sai Ram Reddy Solleti — AI/ML Engineer">
+<meta property="og:description" content="A voice agent at 95.6% task completion. A classifier at 98.46% on held-out data. A coordination algorithm benchmarked against nine protocols — including where it lost.">
+<meta property="og:image" content="https://solleti.dev/photo.jpg">
+<meta name="twitter:image" content="https://solleti.dev/photo.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sai Ram Reddy Solleti — AI/ML Engineer">
+<meta name="twitter:description" content="A voice agent at 95.6% task completion. A classifier at 98.46% on held-out data. A coordination algorithm benchmarked against nine protocols — including where it lost.">
+<meta name="theme-color" content="#F0EEE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E0E0E" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F0EEE9; --bg-2:#E7E4DD; --card:#FFFFFF;
+  --fg:#121212; --fg-2:#4A4843; --fg-3:#8B8880;
+  --line:#D5D1C8; --line-2:#BFB9AC;
+  --accent:#C1440E;
+  --display:"Archivo",ui-sans-serif,system-ui,sans-serif;
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --measure:60ch;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E0E0E; --bg-2:#161513; --card:#181715;
+    --fg:#F2F0EC; --fg-2:#B6B2A9; --fg-3:#807D75;
+    --line:#26241F; --line-2:#3A3630; --accent:#FF7A33;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E0E0E; --bg-2:#161513; --card:#181715;
+  --fg:#F2F0EC; --fg-2:#B6B2A9; --fg-3:#807D75;
+  --line:#26241F; --line-2:#3A3630; --accent:#FF7A33;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg-2);font-family:var(--sans);
+     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--fg);text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+h1,h2,h3{font-family:var(--display);color:var(--fg);margin:0;letter-spacing:-.04em}
+.wrap{max-width:1240px;margin:0 auto;padding:0 36px}
+@media (max-width:720px){.wrap{padding:0 20px}}
+#bar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:90}
+
+.pill{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:80;
+  display:flex;align-items:center;gap:4px;background:var(--fg);border-radius:999px;
+  padding:7px 8px 7px 20px;box-shadow:0 8px 30px rgba(0,0,0,.16)}
+.pill .nm{font-family:var(--display);font-weight:700;font-size:14px;color:var(--bg);margin-right:8px}
+.pill a{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--bg);opacity:.6;
+  padding:7px 11px;border-radius:999px;transition:.2s}
+.pill a:hover{opacity:1;background:rgba(128,128,128,.25)}
+@media (max-width:760px){.pill a.h{display:none}}
+.pill button{border:0;background:var(--bg);color:var(--fg);width:32px;height:32px;border-radius:999px;
+  cursor:pointer;font-size:13px;display:grid;place-items:center;transition:.2s;margin-left:4px}
+.pill button:hover{opacity:.8}
+
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+      position:relative;padding:130px 0 90px;overflow:hidden}
+.hero .wrap{width:100%}
+.tagrow{display:flex;justify-content:space-between;gap:20px;margin-bottom:28px}
+.tagrow span{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-3)}
+.big{font-weight:800;font-size:clamp(28px,6.9vw,96px);line-height:.9;text-transform:uppercase;letter-spacing:-.045em}
+.big .ln{display:block;overflow:hidden;padding-bottom:.04em}
+.big .ln>span{display:block;white-space:nowrap;transform:translateY(105%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.on .big .ln>span{transform:none}
+.big .ln:nth-child(2)>span{transition-delay:.1s}
+.mark{color:var(--accent)}
+.underline{display:flex;align-items:flex-end;justify-content:space-between;gap:44px;margin-top:38px;flex-wrap:wrap}
+.portrait{position:relative;flex:0 0 auto;opacity:0;transform:translateY(18px) scale(.98);
+  transition:opacity 1s .55s,transform 1s .55s}
+.on .portrait{opacity:1;transform:none}
+.portrait img{display:block;width:clamp(180px,22vw,264px);height:auto;aspect-ratio:1;object-fit:cover;
+  border:1px solid var(--line-2);filter:grayscale(.18) contrast(1.06) saturate(.92)}
+:root[data-theme="dark"] .portrait img,
+:root:not([data-theme="light"]) .portrait img{filter:grayscale(.22) contrast(1.04) saturate(.88) brightness(.94)}
+.portrait figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-3);margin-top:10px}
+@media (max-width:860px){.portrait img{width:150px}}
+.blurb{max-width:46ch;font-size:17px;margin:0;opacity:0;transform:translateY(16px);transition:opacity .9s .42s,transform .9s .42s}
+.on .blurb{opacity:1;transform:none}
+.blurb b{color:var(--fg);font-weight:500}
+.year{font-family:var(--display);font-weight:800;font-size:clamp(26px,4vw,46px);color:var(--fg);
+  letter-spacing:-.04em;opacity:0;transition:opacity .9s .6s;line-height:1}
+.on .year{opacity:1}
+
+.glyph{position:absolute;color:var(--accent);opacity:0;transition:opacity 1s .7s}
+.on .glyph{opacity:.9}
+.glyph.g1{top:15%;right:5%;width:78px;animation:drift 7s ease-in-out infinite}
+.glyph.g2{bottom:18%;left:2.5%;width:54px;animation:drift 9s ease-in-out infinite reverse}
+@media (max-width:900px){.glyph{display:none}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+.mq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    overflow:hidden;padding:16px 0;background:var(--bg-2)}
+.mq-in{display:flex;width:max-content;animation:slide 36s linear infinite}
+.mq-in span{font-family:var(--display);font-weight:700;font-size:clamp(15px,2vw,22px);
+  text-transform:uppercase;letter-spacing:-.02em;color:var(--fg);padding:0 20px;white-space:nowrap}
+.mq-in span::after{content:"◦";margin-left:20px;color:var(--accent)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding:110px 0}
+.sh{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:14px;flex-wrap:wrap}
+.sh h2{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-3)}
+.sh .ct{font-family:var(--mono);font-size:11.5px;color:var(--fg-3)}
+.sr{height:1px;background:var(--line);margin-bottom:48px}
+
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+@media (max-width:760px){.kpis{grid-template-columns:1fr}}
+.kpi{padding:28px 26px 28px 0;border-bottom:1px solid var(--line)}
+.kpi+.kpi{border-left:1px solid var(--line);padding-left:26px}
+@media (max-width:760px){.kpi+.kpi{border-left:0;padding-left:0}}
+.kpi b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(38px,6vw,64px);
+  color:var(--accent);letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.kpi span{display:block;font-size:13.5px;color:var(--fg-3);margin-top:12px;max-width:34ch}
+
+.w{border-top:1px solid var(--line);padding:42px 0;display:grid;grid-template-columns:64px 1fr;gap:28px}
+@media (max-width:860px){.w{grid-template-columns:1fr;gap:12px}}
+.w .no{font-family:var(--mono);font-size:12px;color:var(--fg-3);padding-top:12px}
+.w .kick{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+.w h3{font-size:clamp(26px,4vw,42px);font-weight:700;line-height:1.04;margin:0 0 10px}
+.w .dek{font-size:17px;color:var(--fg-2);margin:0 0 16px;max-width:var(--measure)}
+.w p{margin:0 0 14px;max-width:var(--measure);font-size:15.5px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--fg);background:var(--card);
+  border:1px solid var(--line-2);border-radius:999px;padding:6px 13px;font-variant-numeric:tabular-nums}
+.chip.hot{color:var(--accent);border-color:var(--accent)}
+.stack{margin-top:16px;font-family:var(--mono);font-size:11.5px;color:var(--fg-3);letter-spacing:.03em}
+.note{margin-top:22px;padding:22px 24px;background:var(--card);border:1px solid var(--line);max-width:var(--measure)}
+.note b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:9px}
+.note p{margin:0;font-size:15px;color:var(--fg-2)}
+.repo{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:12.5px;color:var(--fg);
+  border-bottom:1px solid var(--line-2);padding-bottom:2px;transition:.2s}
+.repo:hover{color:var(--accent);border-color:var(--accent)}
+
+.x{border-top:1px solid var(--line);padding:30px 0;display:grid;grid-template-columns:190px 1fr;gap:32px}
+@media (max-width:860px){.x{grid-template-columns:1fr;gap:10px}}
+.x .when{font-family:var(--mono);font-size:12px;color:var(--fg-3);line-height:1.8}
+.x .when b{display:block;color:var(--fg);font-weight:400}
+.x h3{font-size:22px;font-weight:700;margin:0 0 3px}
+.x .org{font-family:var(--mono);font-size:12.5px;color:var(--fg-3);margin:0 0 12px}
+.x p{margin:0;max-width:var(--measure)}
+.x a{color:var(--accent);border-bottom:1px solid currentColor}
+
+.sk{border-top:1px solid var(--line);padding:16px 0;display:grid;grid-template-columns:220px 1fr;gap:28px}
+@media (max-width:700px){.sk{grid-template-columns:1fr;gap:4px}}
+.sk dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.sk dd{margin:0;font-size:15px}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:0 44px}
+@media (max-width:700px){.cg{grid-template-columns:1fr}}
+.cc{border-top:1px solid var(--line);padding:16px 0}
+.cc b{display:block;color:var(--fg);font-weight:500;font-size:15px}
+.cc span{font-family:var(--mono);font-size:11.5px;color:var(--fg-3)}
+
+.cta{padding:120px 0 90px;border-top:1px solid var(--line)}
+.cta h2{font-weight:800;font-size:clamp(40px,9vw,124px);line-height:.9;text-transform:uppercase;margin:0 0 30px}
+.cl{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.cl a{font-family:var(--mono);font-size:13.5px;border:1px solid var(--line-2);border-radius:999px;
+      padding:11px 20px;color:var(--fg);transition:.2s}
+.cl a:hover{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+footer{border-top:1px solid var(--line);padding:26px 0 40px}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;color:var(--fg-3);letter-spacing:.05em}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv,.big .ln>span,.blurb,.year,.glyph{opacity:1!important;transform:none!important;transition:none!important}
+  .mq-in,.glyph.g1,.glyph.g2{animation:none}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<nav class="pill">
+  <span class="nm">Sai</span>
+  <a href="#work" class="h">Work</a>
+  <a href="#exp" class="h">Experience</a>
+  <a href="resume.pdf" class="h" target="_blank" rel="noopener">Resume</a>
+  <a href="#contact">Contact</a>
+  <button id="tg" aria-label="Switch colour theme">◐</button>
+</nav>
+
+<header class="hero" id="top">
+  <svg class="glyph g1" viewBox="0 0 100 40" fill="none" aria-hidden="true">
+    <path d="M2 20h8l5-15 6 30 6-24 5 18 6-9 5 6 6-12 5 9 6-3 5 5 6-2h24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg class="glyph g2" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+    <path d="M30 8 L52 44 L8 44 Z M30 8 L30 44" stroke="currentColor" stroke-width="2.5"/>
+    <circle cx="30" cy="8" r="5.5" fill="currentColor"/><circle cx="52" cy="44" r="5.5" fill="currentColor"/><circle cx="8" cy="44" r="5.5" fill="currentColor"/>
+  </svg>
+
+  <div class="wrap">
+    <div class="tagrow">
+      <span>AI / Machine Learning Engineer</span>
+      <span>/ Hammond, Indiana</span>
+    </div>
+    <h1 class="big">
+      <span class="ln"><span>Machine learning</span></span>
+      <span class="ln"><span>that <i class="mark" style="font-style:normal">actually runs.</i></span></span>
+    </h1>
+    <div class="underline">
+      <p class="blurb">
+        Not notebooks that demo well. A voice agent answering a real phone line, a coordination algorithm
+        benchmarked against nine published protocols, a classifier measured on held-out data. Built end to end,
+        measured honestly, reported with the numbers it produced — <b>including the ones that didn't go my way.</b>
+      </p>
+      <figure class="portrait" style="margin:0">
+        <img src="photo.jpg" width="640" height="640" alt="Sai Ram Reddy Solleti" loading="eager" decoding="async">
+        <figcaption>Sai Ram Reddy Solleti</figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<div class="mq" aria-hidden="true">
+  <div class="mq-in">
+    <span>PyTorch</span><span>Voice Agents</span><span>Qiskit</span><span>LLM Tool-Calling</span><span>ResNet-50</span><span>Ray</span><span>FastAPI</span><span>Transformers</span><span>AWS</span>
+    <span>PyTorch</span><span>Voice Agents</span><span>Qiskit</span><span>LLM Tool-Calling</span><span>ResNet-50</span><span>Ray</span><span>FastAPI</span><span>Transformers</span><span>AWS</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sh"><h2>Measured</h2></div><div class="sr"></div>
+    <div class="kpis rv">
+      <div class="kpi"><b data-to="95.6" data-suffix="%">0</b><span>Task completion across 90 staged calls to the voice agent</span></div>
+      <div class="kpi"><b data-to="98.46" data-suffix="%">0</b><span>Test accuracy on GTSRB, 12,630 held-out images</span></div>
+      <div class="kpi"><b data-to="44" data-suffix="%" data-prefix="−">0</b><span>Consensus latency against PBFT at equal fairness</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sh"><h2>Selected Work</h2><span class="ct">07 projects</span></div><div class="sr"></div>
+
+    <article class="w rv"><div class="no">01</div><div>
+      <p class="kick">2026 · Conversational AI</p>
+      <h3>Hotel Voice Agent</h3>
+      <p class="dek">A phone line that takes hotel reservations with no human on it.</p>
+      <p>Twilio receives the call and Deepgram Nova&#8209;2 transcribes it. An n8n workflow drives an LLM as a tool&#8209;calling agent against a FastAPI booking backend on PostgreSQL, and ElevenLabs speaks the reply back through TwiML. Conversation history writes to PostgreSQL as JSONB every turn, so the workflow holds no in&#8209;memory session state.</p>
+      <p>Tested across 90 staged calls covering six intent types — availability, reservation, confirmation lookup, cancellation, policy question, mixed conversation — fifteen runs each.</p>
+      <div class="chips"><span class="chip hot">95.6% completion</span><span class="chip hot">4.8s median turn</span><span class="chip">8.4s p95</span><span class="chip">42 rooms</span></div>
+      <div class="note"><b>What failed, and why it matters</b>
+        <p>Four calls out of ninety. Two were relative date phrases like “the weekend after next” passed to the API verbatim. One was ASR misreading a confirmation code containing both an O and a zero. One was ordering — availability offered before guest count. None of the four were model quality. All four were interface design.</p></div>
+      <div class="stack">Twilio / Deepgram / ElevenLabs / n8n / FastAPI / PostgreSQL / Docker / AWS EC2</div>
+      <a class="repo" href="https://github.com/SaiRamReddySolleti/hotel-voice-agent">Repository →</a>
+    </div></article>
+
+    <article class="w rv"><div class="no">02</div><div>
+      <p class="kick">2026 · Quantum ML</p>
+      <h3>Quantum-Secured Voting</h3>
+      <p class="dek">Randomness that is genuinely quantum, not a PRNG in costume.</p>
+      <p>Most “quantum” voting prototypes call Python’s <code>secrets</code> module and describe it as quantum. This one runs real circuits on Qiskit’s Aer simulator for every security&#8209;critical value. Ballot receipts draw 96 bits across six 16&#8209;qubit Hadamard circuits — each qubit placed in equal superposition and collapsed by measurement, with no seed to predict.</p>
+      <p>BB84 key distribution runs on real single&#8209;qubit circuits using X and H gates, with Alice’s bits, Alice’s bases and Bob’s bases all quantum&#8209;generated. Voter identity is decoupled from ballots by SHA&#8209;256 commitment, every event written to a hash&#8209;chained audit log.</p>
+      <div class="chips"><span class="chip hot">96-bit receipts</span><span class="chip">16-qubit QRNG</span><span class="chip">SHA-256</span><span class="chip">7-table schema</span></div>
+      <div class="stack">Qiskit / Qiskit-Aer / Flask / SQLite / Python</div>
+    </div></article>
+
+    <article class="w rv"><div class="no">03</div><div>
+      <p class="kick">2026 · Distributed Systems</p>
+      <h3>HyCoNet</h3>
+      <p class="dek">A coordination algorithm, and an honest benchmark of it.</p>
+      <p>Bounded&#8209;rational leader election paired with fairness&#8209;weighted task rotation and checkpoint&#8209;based recovery, on Ray actors with Redis checkpointing and Ed25519 multi&#8209;signature quorum commits. Benchmarked against nine consensus and task&#8209;allocation protocols including Paxos, Raft, PBFT, Contract Net and gossip.</p>
+      <div class="chips"><span class="chip hot">0.94 fairness</span><span class="chip hot">0.92 utilization</span><span class="chip">8.4ms consensus</span><span class="chip">9 baselines</span></div>
+      <div class="note"><b>Where it lost</b>
+        <p>It did not win on throughput. At 186.9 it placed second&#8209;from&#8209;last of the ten algorithms tested — bully election reached 301.9 — with the highest wall&#8209;clock time and slowest recovery. What it bought was consensus latency 44% below PBFT while holding the same fairness and utilization. That is the trade the design makes, and reporting it the other way round would not survive an interview.</p></div>
+      <div class="stack">Python / Ray / Redis / PyNaCl / Ed25519</div>
+    </div></article>
+
+    <article class="w rv"><div class="no">04</div><div>
+      <p class="kick">2026 · Computer Vision</p>
+      <h3>Road Sign Classification</h3>
+      <p class="dek">Transfer learning on GTSRB, in two deliberate phases.</p>
+      <p>ResNet&#8209;50 pretrained on ImageNet, fine&#8209;tuned on the German Traffic Sign Recognition Benchmark. Phase one trains only the classification head against a frozen backbone — 1,071,147 trainable parameters, 4.36% of the network — taking validation accuracy from 79.2% to 92.6%. Phase two unfreezes everything at a lower learning rate with cosine annealing and early stopping. Trained on 26,640 images across 43 classes.</p>
+      <div class="chips"><span class="chip hot">98.46% accuracy</span><span class="chip hot">0.9845 weighted F1</span><span class="chip">12,630 test images</span></div>
+      <div class="stack">PyTorch / ResNet-50 / EfficientNet-B0 / torchvision</div>
+    </div></article>
+
+    <article class="w rv"><div class="no">05</div><div>
+      <p class="kick">2025 · NLP &amp; Speech</p>
+      <h3>Multilingual Transliteration Chat</h3>
+      <p class="dek">Ten non-Latin scripts, and your text never leaves the browser.</p>
+      <p>Hindi, Russian, Arabic, Greek, Chinese, Japanese, Korean, Hebrew, Telugu and Bengali. Phonetic transliteration runs client&#8209;side, so raw non&#8209;English text never reaches a server. No benchmark existed, so I built one: 100 questions across 10 languages, 1,000 prompts. Later extended with faster&#8209;whisper for push&#8209;to&#8209;talk voice input.</p>
+      <div class="chips"><span class="chip hot">93.4% exact match</span><span class="chip">98% within edit distance 2</span><span class="chip">1.2s round trip</span></div>
+      <div class="stack">React / Node.js / Express / OpenAI API / faster-whisper</div>
+    </div></article>
+
+    <article class="w rv"><div class="no">06</div><div>
+      <p class="kick">2025 · Time Series</p>
+      <h3>Transformer Forecasting</h3>
+      <p class="dek">A small decoder-only transformer on cryptocurrency price data.</p>
+      <p>128&#8209;dimensional embeddings, 4 attention heads, 3 layers, trained on 1,748 chronologically ordered Bitcoin sequences distilled from an 87,000&#8209;record dataset using 40&#8209;step sliding windows. Residuals concentrate in high&#8209;volatility windows, which is where a model this size should be expected to struggle.</p>
+      <div class="chips"><span class="chip hot">R² 0.9213</span><span class="chip">MAE 0.1087</span><span class="chip">MSE 0.0348</span></div>
+      <div class="stack">PyTorch / Pandas / NumPy / Scikit-learn</div>
+    </div></article>
+
+    <article class="w rv"><div class="no">07</div><div>
+      <p class="kick">2024 · NLP</p>
+      <h3>Lang2Code</h3>
+      <p class="dek">Plain-English requests, turned into Python.</p>
+      <p>A custom spaCy named&#8209;entity model with GloVe embeddings, trained on 525 annotated queries spanning 20 intents and 10 entity types, mapping requests onto a library of 100 code snippets behind a REST API and client.</p>
+      <div class="chips"><span class="chip hot">525 queries</span><span class="chip">20 intents</span><span class="chip">100 snippets</span></div>
+      <div class="stack">Python / spaCy / GloVe / Flask</div>
+      <a class="repo" href="https://github.com/SaiRamReddySolleti/Lang2Code">Repository →</a>
+    </div></article>
+  </div>
+</section>
+
+<section id="exp">
+  <div class="wrap">
+    <div class="sh"><h2>Experience</h2></div><div class="sr"></div>
+    <div class="x rv"><div class="when"><b>Aug 2025</b>May 2026</div><div>
+      <h3>Research Assistant</h3><p class="org">Purdue University</p>
+      <p>Worked with <a href="https://www.linkedin.com/in/ashokdot117vusaraja/">Dr. Ashok Vardhan Raja</a> on distributed multi-agent systems and conversational AI, taking HyCoNet and the Hotel Voice Agent from implementation through benchmark design and measurement to technical write-up, including an IEEE-format paper on the voice agent architecture and its evaluation.</p>
+    </div></div>
+    <div class="x rv"><div class="when"><b>Jan 2025</b>Dec 2026</div><div>
+      <h3>M.S., Applied Artificial Intelligence</h3><p class="org">Purdue University · GPA 4.0 / 4.0</p>
+      <p>Coursework across practical deep learning, quantum machine learning, generative AI, applied machine learning, high-performance computing and data visualization.</p>
+    </div></div>
+    <div class="x rv"><div class="when"><b>Jul 2024</b>Sep 2024</div><div>
+      <h3>Process Associate</h3><p class="org">Genpact</p>
+      <p>Resolved customer queries with cross-functional teams, cutting average response time by 15%, and supported the rollout of new process policies and internal systems.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="sh"><h2>Stack</h2></div><div class="sr"></div>
+    <dl class="rv" style="margin:0">
+      <div class="sk"><dt>Programming</dt><dd>Python · SQL · Java · C · JavaScript · PHP</dd></div>
+      <div class="sk"><dt>ML &amp; Deep Learning</dt><dd>PyTorch · TensorFlow · Scikit-learn · XGBoost · Hugging Face Transformers · OpenCV · LLM fine-tuning · RAG</dd></div>
+      <div class="sk"><dt>Voice &amp; Agents</dt><dd>Twilio · Deepgram · ElevenLabs · OpenAI Whisper · n8n</dd></div>
+      <div class="sk"><dt>Data &amp; Analysis</dt><dd>Pandas · NumPy · Matplotlib · Seaborn · SHAP · Jupyter</dd></div>
+      <div class="sk"><dt>Cloud &amp; MLOps</dt><dd>AWS EC2 · S3 · Azure · Docker · Docker Compose · Git · GitHub Actions</dd></div>
+      <div class="sk"><dt>Databases</dt><dd>PostgreSQL · MySQL · MongoDB · Elasticsearch</dd></div>
+      <div class="sk"><dt>Web &amp; APIs</dt><dd>FastAPI · Flask · React · Node.js · Express · REST</dd></div>
+    </dl>
+    <div style="height:60px"></div>
+    <div class="sh"><h2>Certifications</h2></div><div class="sr"></div>
+    <div class="cg rv">
+      <div class="cc"><b>AWS Certified AI Practitioner</b><span>Amazon Web Services · 2026–2029</span></div>
+      <div class="cc"><b>Python 3 Programming</b><span>University of Michigan / Coursera · 2023</span></div>
+      <div class="cc"><b>CCNA</b><span>Cisco · 2024</span></div>
+      <div class="cc"><b>Cybersecurity Essentials</b><span>Cisco · 2023</span></div>
+      <div class="cc"><b>Java Full Stack</b><span>Wipro · 2023</span></div>
+      <div class="cc"><b>Introduction to IoT</b><span>Cisco · 2022</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap">
+    <h2 class="rv">Let’s talk.</h2>
+    <p class="rv" style="max-width:var(--measure);font-size:17px">
+      I finish my master’s in December 2026 and I’m looking for AI/ML engineering roles where the work ships.
+      If any of the above is close to what your team is building, get in touch.
+    </p>
+    <div class="cl rv">
+      <a href="mailto:solleti.sairam2002@gmail.com">solleti.sairam2002@gmail.com</a>
+      <a href="https://github.com/SaiRamReddySolleti">GitHub</a>
+      <a href="https://linkedin.com/in/sairamreddysolleti">LinkedIn</a>
+      <a href="resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <span>© 2026 Sai Ram Reddy Solleti — Hammond, Indiana</span>
+  <span>solleti.dev — no framework, no build step</span>
+</div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  try{var s=localStorage.getItem('theme'); if(s) root.setAttribute('data-theme',s);}catch(e){}
+  document.getElementById('tg').addEventListener('click',function(){
+    var c=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var n=c==='dark'?'light':'dark';
+    root.setAttribute('data-theme',n);
+    try{localStorage.setItem('theme',n);}catch(e){}
+  });
+  requestAnimationFrame(function(){document.body.classList.add('on');});
+
+  var bar=document.getElementById('bar');
+  addEventListener('scroll',function(){
+    var h=document.documentElement.scrollHeight-innerHeight;
+    bar.style.width=(h>0?scrollY/h*100:0)+'%';
+  },{passive:true});
+
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+
+    var co=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return; co.unobserve(e.target);
+        var el=e.target, to=parseFloat(el.dataset.to), dec=(el.dataset.to.split('.')[1]||'').length;
+        var suf=el.dataset.suffix||'', pre=el.dataset.prefix||'';
+        if(reduce){el.textContent=pre+to.toFixed(dec)+suf; return;}
+        var t0=performance.now();
+        (function step(t){
+          var k=Math.min(1,(t-t0)/1200), e2=1-Math.pow(1-k,4);
+          el.textContent=pre+(to*e2).toFixed(dec)+suf;
+          if(k<1) requestAnimationFrame(step);
+        })(t0);
+      });
+    },{threshold:.5});
+    document.querySelectorAll('.kpi b').forEach(function(el){co.observe(el);});
+  } else {
+    document.querySelectorAll('.rv').forEach(function(e){e.classList.add('in');});
+    document.querySelectorAll('.kpi b').forEach(function(e){e.textContent=(e.dataset.prefix||'')+e.dataset.to+(e.dataset.suffix||'');});
+  }
+})();
+</script>
+</body>
+</html>
