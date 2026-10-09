@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Traffic</title>
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F7F6F2; --bg-2:#F1EEE7; --card:#FFFFFF;
+  --fg:#16150F; --fg-2:#4B4941; --fg-3:#8C8879;
+  --line:#E7E3D9; --line-2:#D6D1C4;
+  --accent:#6B6246;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --sans:"Inter",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#12120F; --bg-2:#191814; --card:#1C1B17;
+    --fg:#F4F2EC; --fg-2:#B6B2A7; --fg-3:#847F72;
+    --line:#2A2823; --line-2:#3B382F;
+    --accent:#C8BC94;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg-2);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:56px 20px 80px}
+h1{margin:0 0 6px;font-family:var(--serif);font-weight:400;font-size:40px;color:var(--fg);letter-spacing:-.01em}
+.sub{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);margin:0 0 36px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:34px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.kpi b{display:block;font-family:var(--serif);font-weight:400;font-size:38px;line-height:1;color:var(--fg);font-variant-numeric:tabular-nums}
+.kpi span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);margin-top:10px}
+h2{margin:0 0 14px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+.weeks{display:flex;align-items:flex-end;gap:8px;height:120px}
+.week{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:7px;min-width:0}
+.week .bar{width:100%;background:var(--accent);border-radius:3px 3px 0 0;min-height:2px;opacity:.85}
+.week .n{font-family:var(--mono);font-size:10.5px;color:var(--fg-2);font-variant-numeric:tabular-nums}
+.week .lb{font-family:var(--mono);font-size:9.5px;color:var(--fg-3);white-space:nowrap}
+.msg{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;color:var(--fg-2);font-size:14px}
+.msg strong{color:var(--fg)}
+.msg code{font-family:var(--mono);font-size:12.5px;background:var(--bg-2);padding:1px 5px;border-radius:4px}
+.foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--fg-3)}
+a{color:var(--fg);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="gate">
+    <h1>Not found</h1>
+    <p class="sub">404</p>
+    <p>There is nothing at this address. <a href="/">Go to the site</a>.</p>
+  </div>
+
+  <div id="panel" class="hidden">
+    <h1>Traffic</h1>
+    <p class="sub">solleti.dev · visitors</p>
+    <div id="err"></div>
+    <div class="grid" id="kpis">
+      <div class="kpi"><b id="k-today">·</b><span>Today</span></div>
+      <div class="kpi"><b id="k-7">·</b><span>Last 7 days</span></div>
+      <div class="kpi"><b id="k-30">·</b><span>Last 30 days</span></div>
+      <div class="kpi"><b id="k-all">·</b><span>All time</span></div>
+    </div>
+    <h2>Last eight weeks</h2>
+    <div class="panel"><div class="weeks" id="weeks"></div></div>
+    <p class="foot">Counts come from GoatCounter, refreshed each time this page loads. Full detail, referrers and pages: <a href="https://solleti.goatcounter.com" rel="noopener">your dashboard</a>.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY = "k9t4m-7xq2";
+  if(location.hash.replace(/^#/,"") !== KEY) return;
+  document.getElementById("gate").className = "hidden";
+  document.getElementById("panel").className = "";
+
+  var BASE = "https://solleti.goatcounter.com/counter/TOTAL.json";
+  function iso(d){ return d.toISOString().slice(0,10); }
+  function daysAgo(n){ var d = new Date(); d.setDate(d.getDate()-n); return d; }
+
+  function get(params){
+    var url = BASE + (params ? "?" + params : "");
+    return fetch(url, {mode:"cors"}).then(function(r){
+      if(r.status === 404) throw {kind:"off"};
+      if(!r.ok) throw {kind:"http", status:r.status};
+      return r.json();
+    }).then(function(j){ return j.count; });
+  }
+  function num(s){ return parseInt(String(s).replace(/[^0-9]/g,""),10) || 0; }
+
+  function fail(e){
+    var el = document.getElementById("err");
+    if(e && e.kind === "off"){
+      el.innerHTML = '<div class="msg"><strong>Counts are switched off.</strong> In GoatCounter go to Settings → Site settings and tick <code>Allow adding visitor counts on your website</code>, then reload this page.</div>';
+    } else {
+      el.innerHTML = '<div class="msg"><strong>Could not reach GoatCounter.</strong> The numbers below may be missing. Your <a href="https://solleti.goatcounter.com" rel="noopener">dashboard</a> always has them.</div>';
+    }
+  }
+
+  function set(id, v){ document.getElementById(id).textContent = v; }
+
+  get("start=" + iso(new Date())).then(function(c){ set("k-today", c); }).catch(fail);
+  get("start=" + iso(daysAgo(6))).then(function(c){ set("k-7", c); }).catch(function(){});
+  get("start=" + iso(daysAgo(29))).then(function(c){ set("k-30", c); }).catch(function(){});
+  get("").then(function(c){ set("k-all", c); }).catch(function(){});
+
+  var weeks = [];
+  for(var i = 7; i >= 0; i--){
+    weeks.push({start: daysAgo(i*7 + 6), end: daysAgo(i*7)});
+  }
+  Promise.all(weeks.map(function(w){
+    return get("start=" + iso(w.start) + "&end=" + iso(w.end)).then(num).catch(function(){ return 0; });
+  })).then(function(counts){
+    var max = Math.max.apply(null, counts.concat([1]));
+    document.getElementById("weeks").innerHTML = weeks.map(function(w, i){
+      var h = Math.round(counts[i] / max * 86);
+      var lb = w.end.toLocaleDateString(undefined,{month:"short",day:"numeric"});
+      return '<div class="week"><span class="n">' + counts[i] + '</span>'
+           + '<span class="bar" style="height:' + Math.max(h,2) + 'px"></span>'
+           + '<span class="lb">' + lb + '</span></div>';
+    }).join("");
+  });
+})();
+</script>
+</body>
+</html>
